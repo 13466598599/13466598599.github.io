@@ -17,16 +17,16 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>git常用命令 | 任俊达的技术博客</title>
-  <meta name="description" content="查看所有的分支git branch -r 查看所有的分支git pull 拉取远端数据git branch 查看当前所在的分支git checkout ‘分支名’  切换分支 素质三连git add -Agit commit -m’描述’git push origin ‘分支名’ git merge ‘分支名’ 合并分支git log 查看提交历史git status 查看当前分支下代码状态git">
+  <title>Git分支管理 | 任俊达的技术博客</title>
+  <meta name="description" content="为啥要使用Git分支呢? 一般情况,master主分支不做开发,master主分支只做生成环境. 开发一般在子分支, 因为我们在开发过程中,代码避免出现Bug或修改部分代码, 这些问题是在子分支上解决, 解决Bug后,没有任何问题,合并到master主分支上  分支命令查看所有的分支: git branch -r    .* 是当前所在的分支 查看当前所在的分支: git branch 切换分支:">
 <meta property="og:type" content="article">
-<meta property="og:title" content="git常用命令">
+<meta property="og:title" content="Git分支管理">
 <meta property="og:url" content="http://renjunda.ren/2019/05/30/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/index.html">
 <meta property="og:site_name" content="任俊达的技术博客">
-<meta property="og:description" content="查看所有的分支git branch -r 查看所有的分支git pull 拉取远端数据git branch 查看当前所在的分支git checkout ‘分支名’  切换分支 素质三连git add -Agit commit -m’描述’git push origin ‘分支名’ git merge ‘分支名’ 合并分支git log 查看提交历史git status 查看当前分支下代码状态git">
+<meta property="og:description" content="为啥要使用Git分支呢? 一般情况,master主分支不做开发,master主分支只做生成环境. 开发一般在子分支, 因为我们在开发过程中,代码避免出现Bug或修改部分代码, 这些问题是在子分支上解决, 解决Bug后,没有任何问题,合并到master主分支上  分支命令查看所有的分支: git branch -r    .* 是当前所在的分支 查看当前所在的分支: git branch 切换分支:">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2019-05-30T02:15:03.000Z">
-<meta property="article:modified_time" content="2021-05-30T02:45:09.458Z">
+<meta property="article:modified_time" content="2021-05-30T03:56:53.662Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
@@ -57,9 +57,9 @@
         <a id="avatar" href="https://github.com/cofess" target="_blank">
           <img class="img-circle img-rotate" src="/images/avatar.jpg" width="200" height="200">
         </a>
-        <h2 id="name" class="hidden-xs hidden-sm">昵称</h2>
-        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Web Developer &amp; Designer</h3>
-        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Shenzhen, China</small>
+        <h2 id="name" class="hidden-xs hidden-sm">任俊达</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">吃货模式关闭,学霸模式开启</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> 北京昌平</small>
       </div>
       
       <div class="search" id="search-form-wrap">
@@ -114,16 +114,6 @@
             <i class="icon icon-archives-fill"></i>
             
             <span class="menu-title">归档</span>
-          </a>
-        </li>
-        
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories">
-            
-            <i class="icon icon-folder"></i>
-            
-            <span class="menu-title">分类</span>
           </a>
         </li>
         
@@ -226,7 +216,7 @@
   <div class="widget">
     <h3 class="widget-title">归档</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">六月 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">五月 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -238,6 +228,21 @@
     <div class="widget-body">
       <ul class="recent-post-list list-unstyled no-thumbnail">
         
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2019/06/15/django%E6%80%8E%E6%A0%B7%E8%87%AA%E5%8A%A8%E7%94%9F%E6%88%90%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/" class="title">django怎样自动生成接口文档</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2019-06-15T04:01:12.000Z" itemprop="datePublished">2019-06-15</time>
+              </p>
+            </div>
+          </li>
+          
           <li>
             
             <div class="item-inner">
@@ -260,10 +265,25 @@
                 
               </p>
               <p class="item-title">
-                <a href="/2019/05/30/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="title">git常用命令</a>
+                <a href="/2019/05/30/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" class="title">Git分支管理</a>
               </p>
               <p class="item-date">
                 <time datetime="2019-05-30T02:15:03.000Z" itemprop="datePublished">2019-05-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                
+              </p>
+              <p class="item-title">
+                <a href="/2018/08/01/%E9%83%A8%E7%BD%B2%E6%97%B6django%E6%B2%A1%E6%9C%89%E6%A0%B7%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" class="title">部署时django没有样式解决方案</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2018-08-01T00:08:09.000Z" itemprop="datePublished">2018-08-01</time>
               </p>
             </div>
           </li>
@@ -288,7 +308,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      git常用命令
+      Git分支管理
     </h1>
   
 
@@ -311,9 +331,34 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h1 id="查看所有的分支"><a href="#查看所有的分支" class="headerlink" title="查看所有的分支"></a>查看所有的分支</h1><p>git branch -r 查看所有的分支<br>git pull 拉取远端数据<br>git branch 查看当前所在的分支<br>git checkout ‘分支名’  切换分支</p>
-<p>素质三连<br>git add -A<br>git commit -m’描述’<br>git push origin ‘分支名’</p>
-<p>git merge ‘分支名’ 合并分支<br>git log 查看提交历史<br>git status 查看当前分支下代码状态<br>git rebase 变基</p>
+        <h1 id="为啥要使用Git分支呢"><a href="#为啥要使用Git分支呢" class="headerlink" title="为啥要使用Git分支呢?"></a>为啥要使用Git分支呢?</h1><ul>
+<li>一般情况,master主分支不做开发,master主分支只做生成环境.</li>
+<li>开发一般在子分支, 因为我们在开发过程中,代码避免出现Bug或修改部分代码, 这些问题是在子分支上解决, 解决Bug后,没有任何问题,合并到master主分支上</li>
+</ul>
+<h3 id="分支命令"><a href="#分支命令" class="headerlink" title="分支命令"></a>分支命令</h3><p>查看所有的分支: git branch -r   </p>
+<p>.* 是当前所在的分支</p>
+<p>查看当前所在的分支: git branch</p>
+<p>切换分支: git checkout ‘分支名’</p>
+<p>查看提交历史: git log</p>
+<p>回退到指定版本: git reset -hard 日志id</p>
+<p>查看当前分支下的状态: git status</p>
+<h3 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h3><ul>
+<li><p>首先进入到master分支下 (gie checkout master)</p>
+</li>
+<li><p>合并: git merge 分支名</p>
+</li>
+<li><p>推送: git push </p>
+</li>
+<li><p>素质三连</p>
+</li>
+</ul>
+<ul>
+<li>git merge特点:<ul>
+<li>只处理一次冲突</li>
+<li>只会记录合并的历史记录, 合并的commit 按照提交时间排列展示</li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -323,7 +368,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://renjunda.ren/2019/05/30/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="git常用命令" target="_blank" rel="external">http://renjunda.ren/2019/05/30/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</a>
+      <a href="http://renjunda.ren/2019/05/30/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Git分支管理" target="_blank" rel="external">http://renjunda.ren/2019/05/30/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -342,7 +387,7 @@
         </a>
       </div>
       <div class="media-body">
-        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">昵称</span><small class="ml-1x">Web Developer &amp; Designer</small></a></h3>
+        <h3 class="media-heading"><a href="https://github.com/cofess" target="_blank"><span class="text-dark">任俊达</span><small class="ml-1x">吃货模式关闭,学霸模式开启</small></a></h3>
         <div>个人简介。</div>
       </div>
     </figure>
@@ -373,6 +418,10 @@
       <a href="/2019/06/03/%E6%80%8E%E6%A0%B7%E8%BF%99%E6%98%AFflask%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86/" title="怎样这是flask后台管理"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;上一篇</span></a>
     </li>
     
+    
+    <li class="next">
+      <a href="/2018/08/01/%E9%83%A8%E7%BD%B2%E6%97%B6django%E6%B2%A1%E6%9C%89%E6%A0%B7%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="部署时django没有样式解决方案"><span>下一篇&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
     
     
   </ul>
@@ -406,7 +455,7 @@
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade active in" id="alipay">
               <div class="donate-payimg">
-                <img src="/images/donate/alipayimg.png" alt="扫码支持" title="扫一扫" />
+                <img src="/images/zhifubao.png" alt="扫码支持" title="扫一扫" />
               </div>
               <p class="text-muted mv">扫码打赏，你说多少就多少</p>
               <p class="text-grey">打开支付宝扫一扫，即可进行扫码打赏哦</p>
