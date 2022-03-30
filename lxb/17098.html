@@ -15,19 +15,19 @@
     <meta name="description" content="我们在服务器上部署自己的项目时,发现django没有样式,这时我们需要收集静态资源来进行解决. 在项目中创建一个static文件夹  在settings中添加以下配置: 1STATIC_ROOT &#x3D; os.path.join(BASE_DIR, &amp;#x27;static&amp;#x27;)  然后在nginx配置中添加 123location &#x2F;static&#x2F; &amp;#123;	root &#x2F;home&#x2F;myp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="部署时django没有样式解决方案">
-<meta property="og:url" content="https://shuoit.net/2018/08/01/%E9%83%A8%E7%BD%B2%E6%97%B6django%E6%B2%A1%E6%9C%89%E6%A0%B7%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
+<meta property="og:url" content="https://renjunda.ren/lxb/17098.html">
 <meta property="og:site_name" content="任俊达-技术博客">
 <meta property="og:description" content="我们在服务器上部署自己的项目时,发现django没有样式,这时我们需要收集静态资源来进行解决. 在项目中创建一个static文件夹  在settings中添加以下配置: 1STATIC_ROOT &#x3D; os.path.join(BASE_DIR, &amp;#x27;static&amp;#x27;)  然后在nginx配置中添加 123location &#x2F;static&#x2F; &amp;#123;	root &#x2F;home&#x2F;myp">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2018-08-01T00:08:09.000Z">
-<meta property="article:modified_time" content="2022-03-11T05:34:20.909Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2022-03-30T09:45:45.342Z">
+<meta property="article:author" content="任俊达">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1648633068353">
+    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1648633764927">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1648633068353">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1648633068353">
-    <link rel="stylesheet" href="/css/style.css?v=1648633068353">
+    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1648633764927">
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1648633764927">
+    <link rel="stylesheet" href="/css/style.css?v=1648633764927">
      
     
 <meta name="generator" content="Hexo 6.0.0"></head>
@@ -41,15 +41,15 @@
                 <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
                 <div class="mdui-toolbar-spacer"></div>
                 <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
-                <a href="/" title="John Doe" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe"></a>
+                <a href="/" title="任俊达" class="mdui-btn mdui-btn-icon"><img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="任俊达"></a>
             </div>
         </div>
     </div>
     <div id="nexmoe-header">
         <div class="nexmoe-drawer mdui-drawer" id="drawer">
     <div class="nexmoe-avatar mdui-ripple">
-        <a href="/" title="John Doe">
-            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="John Doe" alt="John Doe">
+        <a href="/" title="任俊达">
+            <img src="https://cdn.jsdelivr.net/gh/nexmoe/nexmoe.github.io@latest/images/avatar.png" alt="任俊达" alt="任俊达">
         </a>
     </div>
     <div class="nexmoe-count">
@@ -119,7 +119,7 @@
     
 </aside>
     <div class="nexmoe-copyright">
-        &copy; 2022 John Doe
+        &copy; 2022 任俊达
         Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
         & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
         <br><a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://i.dawnlab.me/c0268c1e6cfd0863d6ba35be1575941a.png" width="150px"></a><script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -165,8 +165,8 @@
   
       
     <div class="nexmoe-post-copyright">
-        <strong>Author：</strong>John Doe<br>
-        <strong>Link：</strong><a href="https://shuoit.net/2018/08/01/%E9%83%A8%E7%BD%B2%E6%97%B6django%E6%B2%A1%E6%9C%89%E6%A0%B7%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/" title="https:&#x2F;&#x2F;shuoit.net&#x2F;2018&#x2F;08&#x2F;01&#x2F;%E9%83%A8%E7%BD%B2%E6%97%B6django%E6%B2%A1%E6%9C%89%E6%A0%B7%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88&#x2F;" target="_blank" rel="noopener">https:&#x2F;&#x2F;shuoit.net&#x2F;2018&#x2F;08&#x2F;01&#x2F;%E9%83%A8%E7%BD%B2%E6%97%B6django%E6%B2%A1%E6%9C%89%E6%A0%B7%E5%BC%8F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88&#x2F;</a><br>
+        <strong>Author：</strong>任俊达<br>
+        <strong>Link：</strong><a href="https://renjunda.ren/lxb/17098.html" title="https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;17098.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;17098.html</a><br>
         
             <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
         
@@ -232,7 +232,7 @@
 
  
 
-<script async src="/js/app.js?v=1648633068354"></script>
+<script async src="/js/app.js?v=1648633764928"></script>
 
 
 
