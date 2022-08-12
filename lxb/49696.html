@@ -24,14 +24,17 @@
 <meta property="article:author" content="任俊达">
 <meta property="article:tag" content="Django">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1659520782609">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1659520782609">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1659520782609">
-    <link rel="stylesheet" href="/css/style.css?v=1659520782609">
-     
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/justifiedGallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1660286322087">
     
-<meta name="generator" content="Hexo 6.0.0"></head>
+    <link rel="stylesheet" href="/css/style.css?v=1660286322087">
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body class="mdui-drawer-body-left">
     
@@ -54,7 +57,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>Articles</span>14</div>
+        <div><span>Articles</span>15</div>
         <div><span>Tags</span>9</div>
         <div><span>Categories</span>0</div>
     </div>
@@ -145,7 +148,7 @@
   <article>
       
           <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
-              <img data-src="https://t7.baidu.com/it/u=4256280520,1252070511&fm=193&f=GIF" data-sizes="auto" alt="怎样实现图片验证码" class="lazyload">
+              <img src="https://t7.baidu.com/it/u=4256280520,1252070511&fm=193&f=GIF" alt="怎样实现图片验证码" loading="lazy">
               <h1>怎样实现图片验证码</h1>
           </div>
       
@@ -154,7 +157,9 @@
     <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月31日</a>
 </div>
 
-      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    
+</div>
 
       <h2 id="利用django-vue实现图片验证码"><a href="#利用django-vue实现图片验证码" class="headerlink" title="利用django + vue实现图片验证码"></a>利用django + vue实现图片验证码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> captcha.image <span class="keyword">import</span> ImageCaptcha</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建redis实例</span></span><br><span class="line">r = redis.Redis(host=<span class="string">&#x27;127.0.0.1&#x27;</span>, port=<span class="number">6379</span>, password=<span class="string">&#x27;&#x27;</span>,decode_responses=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 封装一个函数,此函数用于生成图片验证码中的数字或字母</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">random_code</span>(<span class="params">num=<span class="number">4</span></span>):</span><br><span class="line">    <span class="comment"># num 是生成随机的数量 默认为4</span></span><br><span class="line">    str__a_z = [<span class="built_in">chr</span>(num) <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">97</span>, <span class="number">123</span>)]</span><br><span class="line">    str__A_Z = [<span class="built_in">chr</span>(num) <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">65</span>, <span class="number">91</span>)]</span><br><span class="line">    num_0_9 = [<span class="built_in">str</span>(num) <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>)]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(random.sample(str__a_z + str__A_Z + num_0_9, num))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 此函数用于生成图片</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">make_verify_image</span>(<span class="params">code_str, uuid=<span class="literal">None</span></span>):</span><br><span class="line">    <span class="comment"># 保存验证码到redis中,并且设置过期时间</span></span><br><span class="line">    r.<span class="built_in">set</span>(uuid, code_str, <span class="number">60</span>)</span><br><span class="line">    <span class="comment"># 生成验证码图片</span></span><br><span class="line">    img = ImageCaptcha().generate_image(code_str)</span><br><span class="line">    <span class="comment"># 图片不会永久存储，只需要在内存中存储即可</span></span><br><span class="line">    <span class="comment"># 把Image对象写入到IO流中</span></span><br><span class="line">    out = BytesIO()  <span class="comment"># 文件流对象打开在内存中</span></span><br><span class="line">    img.save(out, <span class="string">&#x27;jpeg&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> out.getvalue()</span><br><span class="line"></span><br><span class="line"><span class="comment"># vue代码</span></span><br><span class="line"></span><br><span class="line">        generate_image_code()</span><br><span class="line">        &#123;</span><br><span class="line">            axios(&#123;</span><br><span class="line">                url:this.base_url + <span class="string">&#x27;userapp/uuid/&#x27;</span>,</span><br><span class="line">            &#125;).then(res=&gt;&#123;</span><br><span class="line">                console.log(res.data)</span><br><span class="line">                this.uuid = res.data</span><br><span class="line">                this.image_code_url = this.base_url +<span class="string">&quot;userapp/&quot;</span> + <span class="string">&#x27;tupian/&#x27;</span> + this.uuid +<span class="string">&#x27;/&#x27;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        UUId()</span><br><span class="line">        &#123;</span><br><span class="line">            axios(&#123;</span><br><span class="line">                url:this.base_url + <span class="string">&#x27;userapp/uuid/&#x27;</span>,</span><br><span class="line">            &#125;).then(res=&gt;&#123;</span><br><span class="line">                console.log(res.data)</span><br><span class="line">                this.uuid = res.data</span><br><span class="line">                this.image_code_url = this.base_url +<span class="string">&quot;userapp/&quot;</span> + <span class="string">&#x27;tupian/&#x27;</span> + this.uuid +<span class="string">&#x27;/&#x27;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        jc()</span><br><span class="line">        &#123;</span><br><span class="line">            axios(&#123;</span><br><span class="line">                url:this.base_url + <span class="string">&#x27;userapp/xy/&#x27;</span>,</span><br><span class="line">                method:<span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">                data:&#123;<span class="string">&#x27;uuid&#x27;</span>:this.uuid,<span class="string">&#x27;code&#x27;</span>:this.check&#125;</span><br><span class="line">            &#125;).then(res=&gt;&#123;</span><br><span class="line">                console.log(res.data)</span><br><span class="line">                <span class="keyword">if</span>(res.data.code == <span class="number">200</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    this.check_img = true</span><br><span class="line">                    this.error_image_code = res.data.msg</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(res.data.code==<span class="number">500</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    this.check_img = false</span><br><span class="line">                    this.error_image_code = res.data.msg</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">GenerateUUID</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request</span>):</span><br><span class="line">        <span class="comment"># 注册页面 挂载时请求接口 返回一个uuid</span></span><br><span class="line">        rt = random_code()</span><br><span class="line">        <span class="comment"># print(rt)</span></span><br><span class="line">        <span class="keyword">return</span> Response(<span class="built_in">str</span>(uuid.uuid1()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Generateimg</span>(<span class="title class_ inherited__">APIView</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    返回前端验证码图片</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, request, uuid</span>):</span><br><span class="line">        <span class="comment"># 2.创建随机数</span></span><br><span class="line">        code = random_code()</span><br><span class="line">        <span class="comment"># 3.生成验证码图片</span></span><br><span class="line">        image = make_verify_image(code, uuid)</span><br><span class="line">        <span class="comment"># 4.返回图片</span></span><br><span class="line">        <span class="keyword">return</span> HttpResponse(image, content_type=<span class="string">&#x27;image/jpeg&#x27;</span>)</span><br></pre></td></tr></table></figure>
   </article>
@@ -225,19 +230,21 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
 
  
 
-<script async src="/js/app.js?v=1659520782609"></script>
+<script async src="/js/app.js?v=1660286322088"></script>
 
 
-	<script async src="/js/search.js?v=1659520782609"></script>
+	<script async src="/js/search.js?v=1660286322088"></script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
 	$(".justified-gallery").justifiedGallery({
 		rowHeight: 160,

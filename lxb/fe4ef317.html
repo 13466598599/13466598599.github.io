@@ -26,14 +26,17 @@
 <meta property="article:tag" content="Linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://tool.lu/netcard/">
-    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1659520782597">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1659520782597">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1659520782597">
-    <link rel="stylesheet" href="/css/style.css?v=1659520782597">
-     
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/justifiedGallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1660286322073">
     
-<meta name="generator" content="Hexo 6.0.0"></head>
+    <link rel="stylesheet" href="/css/style.css?v=1660286322073">
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body class="mdui-drawer-body-left">
     
@@ -56,7 +59,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>Articles</span>14</div>
+        <div><span>Articles</span>15</div>
         <div><span>Tags</span>9</div>
         <div><span>Categories</span>0</div>
     </div>
@@ -147,7 +150,7 @@
   <article>
       
           <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
-              <img data-src="http://renjunda.ren/images/linux.jpg" data-sizes="auto" alt="linux常用命令" class="lazyload">
+              <img src="http://renjunda.ren/images/linux.jpg" alt="linux常用命令" loading="lazy">
               <h1>linux常用命令</h1>
           </div>
       
@@ -156,7 +159,9 @@
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年07月15日</a>
 </div>
 
-      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    
+</div>
 
       <img src="https://tool.lu/netcard/">
 
@@ -180,8 +185,10 @@
 <li>-i：与 -f 选项相反，在覆盖目标文件之前给出提示，要求用户确认是否覆盖，回答 y 时目标文件将被覆盖。</li>
 <li>-p：除复制文件的内容外，还把修改时间和访问权限也复制到新文件中。</li>
 <li>-r：若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件。</li>
-<li>-l：不复制文件，只是生成链接文件。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">拷贝文件或文件夹</span><br><span class="line">cp /root/1.py /home/1.py # 拷贝文件至新目录下</span><br><span class="line">cp -r 表示递归创建</span><br></pre></td></tr></table></figure>
-<h2 id="cp-r-实例"><a href="#cp-r-实例" class="headerlink" title="cp -r 实例"></a>cp -r 实例</h2>使用指令 cp 将当前目录 test&#x2F; 下的所有文件复制到新目录 newtest 下，输入如下命令：<blockquote>
+<li>-l：不复制文件，只是生成链接文件。<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">拷贝文件或文件夹</span><br><span class="line">cp /root/1.py /home/1.py # 拷贝文件至新目录下</span><br><span class="line">cp -r 表示递归创建</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="cp-r-实例"><a href="#cp-r-实例" class="headerlink" title="cp -r 实例"></a>cp -r 实例</h2><p>使用指令 cp 将当前目录 test&#x2F; 下的所有文件复制到新目录 newtest 下，输入如下命令：</p>
+<blockquote>
 <p>cp –r test&#x2F; newtest</p>
 </blockquote>
 <h3 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">创建普通文件</span><br><span class="line">touch 1.py # 创建1.py文件</span><br></pre></td></tr></table></figure>
@@ -200,9 +207,7 @@
 <h3 id="ps"><a href="#ps" class="headerlink" title="ps"></a>ps</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">查看进程</span><br><span class="line">ps -ef | grep process name</span><br></pre></td></tr></table></figure>
 <h3 id="su"><a href="#su" class="headerlink" title="su"></a>su</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">切换账号</span><br><span class="line">su root # 切换为root用户</span><br></pre></td></tr></table></figure>
 <h3 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">修改密码</span><br></pre></td></tr></table></figure>
-<h3 id="rename"><a href="#rename" class="headerlink" title="rename"></a>rename</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">批量修改文件名称</span><br><span class="line"> &gt;[root@localhost kervin24]# ls</span><br><span class="line"> a    c       fc.log  ff.log  fi.log  fl.log  fo.log  fr.log  fu.log  fx.log</span><br><span class="line"> aaa  d       fd.log  fg.log  fj.log  fm.log  fp.log  fs.log  fv.log  fy.log</span><br><span class="line"> b    fb.log  fe.log  fh.log  fk.log  fn.log  fq.log  ft.log  fw.log  fz.log</span><br><span class="line"> [root@localhost kervin24]# rename log txt *    把所有log文件改为txt文件  </span><br><span class="line"> ------------------------------------------------------------------------------</span><br><span class="line"> [root@localhost kervin24]# ls</span><br><span class="line"> a    c       fc.txt  ff.txt  fi.txt  fl.txt  fo.txt  fr.txt  fu.txt  fx.txt</span><br><span class="line"> aaa  d       fd.txt  fg.txt  fj.txt  fm.txt  fp.txt  fs.txt  fv.txt  fy.txt</span><br><span class="line"> b    fb.txt  fe.txt  fh.txt  fk.txt  fn.txt  fq.txt  ft.txt  fw.txt  fz.txt</span><br></pre></td></tr></table></figure></li>
-</ul>
-
+<h3 id="rename"><a href="#rename" class="headerlink" title="rename"></a>rename</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">批量修改文件名称</span><br><span class="line"> &gt;[root@localhost kervin24]# ls</span><br><span class="line"> a    c       fc.log  ff.log  fi.log  fl.log  fo.log  fr.log  fu.log  fx.log</span><br><span class="line"> aaa  d       fd.log  fg.log  fj.log  fm.log  fp.log  fs.log  fv.log  fy.log</span><br><span class="line"> b    fb.log  fe.log  fh.log  fk.log  fn.log  fq.log  ft.log  fw.log  fz.log</span><br><span class="line"> [root@localhost kervin24]# rename log txt *    把所有log文件改为txt文件  </span><br><span class="line"> ------------------------------------------------------------------------------</span><br><span class="line"> [root@localhost kervin24]# ls</span><br><span class="line"> a    c       fc.txt  ff.txt  fi.txt  fl.txt  fo.txt  fr.txt  fu.txt  fx.txt</span><br><span class="line"> aaa  d       fd.txt  fg.txt  fj.txt  fm.txt  fp.txt  fs.txt  fv.txt  fy.txt</span><br><span class="line"> b    fb.txt  fe.txt  fh.txt  fk.txt  fn.txt  fq.txt  ft.txt  fw.txt  fz.txt</span><br></pre></td></tr></table></figure>
   </article>
 
   
@@ -271,19 +276,21 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
 
  
 
-<script async src="/js/app.js?v=1659520782597"></script>
+<script async src="/js/app.js?v=1660286322074"></script>
 
 
-	<script async src="/js/search.js?v=1659520782597"></script>
+	<script async src="/js/search.js?v=1660286322074"></script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
 	$(".justified-gallery").justifiedGallery({
 		rowHeight: 160,

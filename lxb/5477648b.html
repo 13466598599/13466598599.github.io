@@ -24,14 +24,17 @@
 <meta property="article:author" content="任俊达">
 <meta property="article:tag" content="js">
 <meta name="twitter:card" content="summary">
-    <link rel="stylesheet" href="/lib/jquery.fancybox.min.css?v=1659520782604">
     
-    <link rel="stylesheet" href="/lib/mdui_043tiny/css/mdui.css?v=1659520782604">
-    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1659520782604">
-    <link rel="stylesheet" href="/css/style.css?v=1659520782604">
-     
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/justifiedGallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1660286322082">
     
-<meta name="generator" content="Hexo 6.0.0"></head>
+    <link rel="stylesheet" href="/css/style.css?v=1660286322082">
+    
+<meta name="generator" content="Hexo 6.2.0"></head>
 
 <body class="mdui-drawer-body-left">
     
@@ -54,7 +57,7 @@
         </a>
     </div>
     <div class="nexmoe-count">
-        <div><span>Articles</span>14</div>
+        <div><span>Articles</span>15</div>
         <div><span>Tags</span>9</div>
         <div><span>Categories</span>0</div>
     </div>
@@ -145,7 +148,7 @@
   <article>
       
           <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
-              <img data-src="https://img2.baidu.com/it/u=2578751505,2724961323&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" data-sizes="auto" alt="js如何获取url中的参数" class="lazyload">
+              <img src="https://img2.baidu.com/it/u=2578751505,2724961323&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500" alt="js如何获取url中的参数" loading="lazy">
               <h1>js如何获取url中的参数</h1>
           </div>
       
@@ -154,7 +157,9 @@
     <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月01日</a>
 </div>
 
-      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    
+</div>
 
       <h2 id="js如何通过代码获取url中的参数-以下函数是获取url中参数的公有方法-直接使用即可"><a href="#js如何通过代码获取url中的参数-以下函数是获取url中参数的公有方法-直接使用即可" class="headerlink" title="js如何通过代码获取url中的参数, 以下函数是获取url中参数的公有方法, 直接使用即可"></a>js如何通过代码获取url中的参数, 以下函数是获取url中参数的公有方法, 直接使用即可</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">function getRequest() &#123;</span><br><span class="line">      var url = window.location.search; //获取url中<span class="string">&quot;?&quot;</span>符后的字串</span><br><span class="line">      var theRequest = new Object();</span><br><span class="line">      <span class="keyword">if</span> (url.indexOf(<span class="string">&quot;?&quot;</span>) != -<span class="number">1</span>) &#123;</span><br><span class="line">         var <span class="built_in">str</span> = url.substr(<span class="number">1</span>);</span><br><span class="line">         strs = <span class="built_in">str</span>.split(<span class="string">&quot;&amp;&quot;</span>);</span><br><span class="line">         <span class="keyword">for</span>(var i = <span class="number">0</span>; i &lt; strs.length; i ++) &#123;</span><br><span class="line">             //就是这句的问题</span><br><span class="line">            theRequest[strs[i].split(<span class="string">&quot;=&quot;</span>)[<span class="number">0</span>]]=decodeURI(strs[i].split(<span class="string">&quot;=&quot;</span>)[<span class="number">1</span>]);</span><br><span class="line">            //之前用了unescape()</span><br><span class="line">            //才会出现乱码</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> theRequest;</span><br><span class="line">   &#125;</span><br><span class="line">   var arr = getRequest();</span><br><span class="line">   var name = arr[<span class="string">&#x27;name&#x27;</span>];  // url中的参数名称</span><br><span class="line">   var time = arr[<span class="string">&#x27;time&#x27;</span>];  </span><br></pre></td></tr></table></figure>
 
@@ -226,19 +231,21 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/combine/npm/lazysizes@5.1.0/lazysizes.min.js,npm/mdui@0.4.3/dist/js/mdui.min.js?v=1"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
 
  
 
-<script async src="/js/app.js?v=1659520782605"></script>
+<script async src="/js/app.js?v=1660286322083"></script>
 
 
-	<script async src="/js/search.js?v=1659520782605"></script>
+	<script async src="/js/search.js?v=1660286322083"></script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js"></script>
 <script>
 	$(".justified-gallery").justifiedGallery({
 		rowHeight: 160,
