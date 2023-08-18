@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+
+<head>
+    
+    <title>怎样实现图片验证码 - 任俊达的技术博客</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="利用django + vue实现图片验证码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192impo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="怎样实现图片验证码">
+<meta property="og:url" content="https://renjunda.ren/lxb/49696.html">
+<meta property="og:site_name" content="任俊达的技术博客">
+<meta property="og:description" content="利用django + vue实现图片验证码1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192impo">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-05-31T06:22:05.000Z">
+<meta property="article:modified_time" content="2022-04-02T07:35:15.805Z">
+<meta property="article:author" content="任俊达">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/justifiedGallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1692342189676">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1692342189676">
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://i.dawnlab.me/b5a7e61560facdd5b8aa9683fce147d7.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="任俊达" class="mdui-btn mdui-btn-icon"><img src="https://renjunda.ren/images/my_photo.png" alt="任俊达"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="任俊达">
+            <img src="https://renjunda.ren/images/my_photo.png" alt="任俊达" alt="任俊达">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>17</div>
+        <div><span>Tags</span>9</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/money.html" title="请我喝茶">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                请我喝茶
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Django/" style="font-size: 15px;">Django</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/layui/" style="font-size: 10px;">layui</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+    </div>
+    
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 任俊达
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://i.dawnlab.me/c0268c1e6cfd0863d6ba35be1575941a.png" width="150px"></a><script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
+              <img src="https://t7.baidu.com/it/u=4256280520,1252070511&fm=193&f=GIF" alt="怎样实现图片验证码" loading="lazy">
+              <h1>怎样实现图片验证码</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2020年05月31日</a>
+</div>
+
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    
+</div>
+
+      <h2 id="利用django-vue实现图片验证码"><a href="#利用django-vue实现图片验证码" class="headerlink" title="利用django + vue实现图片验证码"></a>利用django + vue实现图片验证码</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> uuid</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"><span class="keyword">from</span> captcha.image <span class="keyword">import</span> ImageCaptcha</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"><span class="keyword">import</span> redis</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建redis实例</span></span><br><span class="line">r = redis.Redis(host=<span class="string">&#x27;127.0.0.1&#x27;</span>, port=<span class="number">6379</span>, password=<span class="string">&#x27;&#x27;</span>,decode_responses=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 封装一个函数,此函数用于生成图片验证码中的数字或字母</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">random_code</span>(<span class="params">num=<span class="number">4</span></span>):</span></span><br><span class="line">    <span class="comment"># num 是生成随机的数量 默认为4</span></span><br><span class="line">    str__a_z = [<span class="built_in">chr</span>(num) <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">97</span>, <span class="number">123</span>)]</span><br><span class="line">    str__A_Z = [<span class="built_in">chr</span>(num) <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">65</span>, <span class="number">91</span>)]</span><br><span class="line">    num_0_9 = [<span class="built_in">str</span>(num) <span class="keyword">for</span> num <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">10</span>)]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>.join(random.sample(str__a_z + str__A_Z + num_0_9, num))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 此函数用于生成图片</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">make_verify_image</span>(<span class="params">code_str, uuid=<span class="literal">None</span></span>):</span></span><br><span class="line">    <span class="comment"># 保存验证码到redis中,并且设置过期时间</span></span><br><span class="line">    r.<span class="built_in">set</span>(uuid, code_str, <span class="number">60</span>)</span><br><span class="line">    <span class="comment"># 生成验证码图片</span></span><br><span class="line">    img = ImageCaptcha().generate_image(code_str)</span><br><span class="line">    <span class="comment"># 图片不会永久存储，只需要在内存中存储即可</span></span><br><span class="line">    <span class="comment"># 把Image对象写入到IO流中</span></span><br><span class="line">    out = BytesIO()  <span class="comment"># 文件流对象打开在内存中</span></span><br><span class="line">    img.save(out, <span class="string">&#x27;jpeg&#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> out.getvalue()</span><br><span class="line"></span><br><span class="line"><span class="comment"># vue代码</span></span><br><span class="line"></span><br><span class="line">        generate_image_code()</span><br><span class="line">        &#123;</span><br><span class="line">            axios(&#123;</span><br><span class="line">                url:this.base_url + <span class="string">&#x27;userapp/uuid/&#x27;</span>,</span><br><span class="line">            &#125;).then(res=&gt;&#123;</span><br><span class="line">                console.log(res.data)</span><br><span class="line">                this.uuid = res.data</span><br><span class="line">                this.image_code_url = this.base_url +<span class="string">&quot;userapp/&quot;</span> + <span class="string">&#x27;tupian/&#x27;</span> + this.uuid +<span class="string">&#x27;/&#x27;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        UUId()</span><br><span class="line">        &#123;</span><br><span class="line">            axios(&#123;</span><br><span class="line">                url:this.base_url + <span class="string">&#x27;userapp/uuid/&#x27;</span>,</span><br><span class="line">            &#125;).then(res=&gt;&#123;</span><br><span class="line">                console.log(res.data)</span><br><span class="line">                this.uuid = res.data</span><br><span class="line">                this.image_code_url = this.base_url +<span class="string">&quot;userapp/&quot;</span> + <span class="string">&#x27;tupian/&#x27;</span> + this.uuid +<span class="string">&#x27;/&#x27;</span></span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line">        jc()</span><br><span class="line">        &#123;</span><br><span class="line">            axios(&#123;</span><br><span class="line">                url:this.base_url + <span class="string">&#x27;userapp/xy/&#x27;</span>,</span><br><span class="line">                method:<span class="string">&#x27;post&#x27;</span>,</span><br><span class="line">                data:&#123;<span class="string">&#x27;uuid&#x27;</span>:this.uuid,<span class="string">&#x27;code&#x27;</span>:this.check&#125;</span><br><span class="line">            &#125;).then(res=&gt;&#123;</span><br><span class="line">                console.log(res.data)</span><br><span class="line">                <span class="keyword">if</span>(res.data.code == <span class="number">200</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    this.check_img = true</span><br><span class="line">                    this.error_image_code = res.data.msg</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(res.data.code==<span class="number">500</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    this.check_img = false</span><br><span class="line">                    this.error_image_code = res.data.msg</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GenerateUUID</span>(<span class="params">APIView</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request</span>):</span></span><br><span class="line">        <span class="comment"># 注册页面 挂载时请求接口 返回一个uuid</span></span><br><span class="line">        rt = random_code()</span><br><span class="line">        <span class="comment"># print(rt)</span></span><br><span class="line">        <span class="keyword">return</span> Response(<span class="built_in">str</span>(uuid.uuid1()))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Generateimg</span>(<span class="params">APIView</span>):</span></span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    返回前端验证码图片</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span>(<span class="params">self, request, uuid</span>):</span></span><br><span class="line">        <span class="comment"># 2.创建随机数</span></span><br><span class="line">        code = random_code()</span><br><span class="line">        <span class="comment"># 3.生成验证码图片</span></span><br><span class="line">        image = make_verify_image(code, uuid)</span><br><span class="line">        <span class="comment"># 4.返回图片</span></span><br><span class="line">        <span class="keyword">return</span> HttpResponse(image, content_type=<span class="string">&#x27;image/jpeg&#x27;</span>)</span><br></pre></td></tr></table></figure>
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>任俊达<br>
+        <strong>Link：</strong><a href="https://renjunda.ren/lxb/49696.html" title="https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;49696.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;49696.html</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Django/" rel="tag">Django</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="Search" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1692342189677"></script>
+
+
+	<script async src="/js/search.js?v=1692342189677"></script>
+
+
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>

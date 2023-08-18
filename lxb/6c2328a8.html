@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+
+<head>
+    
+    <title>Djano实现下载文件功能 (你没事吧?😁) - 任俊达的技术博客</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="一、简单介绍文件下载最简单的文件下载功能的实现    1、将文件流放入HttpResponse对象即可，如    12345def file_download(request):    # do something...    with open(&amp;#x27;file_name.txt&amp;#x27;) as f:        c &#x3D; f.read()    return HttpResponse(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Djano实现下载文件功能 (你没事吧?😁)">
+<meta property="og:url" content="https://renjunda.ren/lxb/6c2328a8.html">
+<meta property="og:site_name" content="任俊达的技术博客">
+<meta property="og:description" content="一、简单介绍文件下载最简单的文件下载功能的实现    1、将文件流放入HttpResponse对象即可，如    12345def file_download(request):    # do something...    with open(&amp;#x27;file_name.txt&amp;#x27;) as f:        c &#x3D; f.read()    return HttpResponse(">
+<meta property="og:locale">
+<meta property="og:image" content="https://renjunda.ren/images/except_data.png">
+<meta property="article:published_time" content="2022-04-01T09:00:21.000Z">
+<meta property="article:modified_time" content="2022-04-02T01:12:18.838Z">
+<meta property="article:author" content="任俊达">
+<meta property="article:tag" content="Django">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://renjunda.ren/images/except_data.png">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/justifiedGallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1692342189671">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1692342189671">
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://i.dawnlab.me/b5a7e61560facdd5b8aa9683fce147d7.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="任俊达" class="mdui-btn mdui-btn-icon"><img src="https://renjunda.ren/images/my_photo.png" alt="任俊达"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="任俊达">
+            <img src="https://renjunda.ren/images/my_photo.png" alt="任俊达" alt="任俊达">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>17</div>
+        <div><span>Tags</span>9</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/money.html" title="请我喝茶">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                请我喝茶
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Django/" style="font-size: 15px;">Django</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/layui/" style="font-size: 10px;">layui</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+    </div>
+    
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 任俊达
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://i.dawnlab.me/c0268c1e6cfd0863d6ba35be1575941a.png" width="150px"></a><script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
+              <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fq_mini%2Cc_zoom%2Cw_640%2Fimages%2F20171023%2F3e344ad5b8844c62b230538e90335cc6.gif&refer=http%3A%2F%2F5b0988e595225.cdn.sohucs.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1651396468&t=a43988a06814406b24880a1ed1beb1fd" alt="Djano实现下载文件功能 (你没事吧?😁)" loading="lazy">
+              <h1>Djano实现下载文件功能 (你没事吧?😁)</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年04月01日</a>
+</div>
+
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    
+</div>
+
+      <h2 id="一、简单介绍文件下载"><a href="#一、简单介绍文件下载" class="headerlink" title="一、简单介绍文件下载"></a>一、简单介绍文件下载</h2><p>最简单的文件下载功能的实现<br>    1、将文件流放入HttpResponse对象即可，如<br>    <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_download</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="comment"># do something...</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;file_name.txt&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        c = f.read()</span><br><span class="line">    <span class="keyword">return</span> HttpResponse(c)</span><br></pre></td></tr></table></figure><br>    这种方式简单粗暴，适合小文件的下载，但如果这个文件非常大，这种方式会占用大量的内存，甚至导致服务器崩溃</p>
+<h3 id="更合理的文件下载功能"><a href="#更合理的文件下载功能" class="headerlink" title="更合理的文件下载功能"></a>更合理的文件下载功能</h3><p>Django的HttpResponse对象允许将迭代器作为传入参数，将上面代码中的传入参数c换成一个迭代器，便可以将上述下载功能优化为对大小文件均适合；而Django更进一步，推荐使StreamingHttpResponse对象取代HttpResponse对象，StreamingHttpResponse对象用于将文件流发送给浏览器，与HttpResponse对象非常相似，对于文件下载功能，使用StreamingHttpResponse对象更合理。</p>
+<p>因此，更加合理的文件下载功能，应该先写一个迭代器，用于处理文件，然后将这个迭代器作为参数传递给StreaminghttpResponse对象</p>
+<p>HttpResponse会直接使用迭代器对象，将迭代器对象的内容存储城字符串，然后返回给客户端，同时释放内存。可以当文件变大看出这是一个非常耗费时间和内存的过程。<br>StreamingHttpResponse这是一种非常省时省内存的方法。但是因为StreamingHttpResponse的文件传输过程持续在整个response的过程中，所以这有可能会降低服务器的性能。</p>
+<p>代码块</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> StreamingHttpResponse </span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_download</span>(<span class="params">request</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">file_iterator</span>(<span class="params">file_name, chunk_size=<span class="number">512</span></span>):</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(file_name) <span class="keyword">as</span> f:</span><br><span class="line">            <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">                c = f.read(chunk_size)</span><br><span class="line">                <span class="keyword">if</span> c:</span><br><span class="line">                    <span class="keyword">yield</span> c</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    the_file_name = <span class="string">&quot;file_name.txt&quot;</span></span><br><span class="line">    response = StreamingHttpResponse(file_iterator(the_file_name))</span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+
+<h3 id="结合项目使用完整示例代码如下，根据自己需求整改"><a href="#结合项目使用完整示例代码如下，根据自己需求整改" class="headerlink" title="结合项目使用完整示例代码如下，根据自己需求整改"></a>结合项目使用完整示例代码如下，根据自己需求整改</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入相关依赖文件</span></span><br><span class="line"><span class="keyword">import</span> xlsxwriter</span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> StreamingHttpResponse, JsonResponse, FileResponse</span><br><span class="line"><span class="keyword">from</span> django.http <span class="keyword">import</span> HttpResponse</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> reverse_lazy</span><br><span class="line"><span class="keyword">from</span> django.utils.encoding <span class="keyword">import</span> escape_uri_path</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">export_data</span>(<span class="params">request</span>):</span></span><br><span class="line">    filename = <span class="string">&#x27;&#123;&#125;.xlsx&#x27;</span>.<span class="built_in">format</span>(<span class="string">&#x27;人员信息&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;GET&#x27;</span>:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            response = StreamingHttpResponse(file_iterator(filename))</span><br><span class="line">            <span class="comment"># 以流的形式下载文件,这样可以实现任意格式的文件下载</span></span><br><span class="line">            response[<span class="string">&#x27;Content-Type&#x27;</span>] = <span class="string">&#x27;application/octet-stream&#x27;</span></span><br><span class="line">            response[<span class="string">&quot;Content-Disposition&quot;</span>] = <span class="string">&quot;attachment; filename*=UTF-8&#x27;&#x27;&#123;&#125;&quot;</span>.<span class="built_in">format</span>(escape_uri_path(filename))</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">return</span> HttpResponse(<span class="string">&quot;生成文件失败&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> response</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        <span class="comment"># 表头,为了方便直接再代码中, 平时我们为了规范代码一般写在配置文件中</span></span><br><span class="line">        ping_header = &#123;</span><br><span class="line">            <span class="string">&#x27;姓名&#x27;</span>: <span class="string">&#x27;1&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;性别&#x27;</span>: <span class="string">&#x27;2&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;年龄&#x27;</span>: <span class="string">&#x27;3&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;居住地址&#x27;</span>: <span class="string">&#x27;4&#x27;</span>,</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment"># 先把数据写死，根据需求自己去数据库查询</span></span><br><span class="line">        data = [</span><br><span class="line">            &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;刘备&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">18</span>, <span class="string">&#x27;addr&#x27;</span>: <span class="string">&#x27;荆州&#x27;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;关羽&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;女&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;addr&#x27;</span>: <span class="string">&#x27;荆州&#x27;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;张飞&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;男&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">10</span>, <span class="string">&#x27;addr&#x27;</span>: <span class="string">&#x27;荆州&#x27;</span>&#125;,</span><br><span class="line">            &#123;<span class="string">&#x27;name&#x27;</span>: <span class="string">&#x27;黄宇恒&#x27;</span>, <span class="string">&#x27;sex&#x27;</span>: <span class="string">&#x27;其他&#x27;</span>, <span class="string">&#x27;age&#x27;</span>: <span class="number">99</span>, <span class="string">&#x27;addr&#x27;</span>: <span class="string">&#x27;江西省南昌市进贤县&#x27;</span>&#125;,</span><br><span class="line">        ]</span><br><span class="line">        workbook = xlsxwriter.Workbook(filename)  <span class="comment"># 建立文件</span></span><br><span class="line">        worksheet = workbook.add_worksheet(<span class="string">&quot;人员信息统计&quot;</span>)</span><br><span class="line">        head_style = workbook.add_format(xlsx_style(bold=<span class="literal">True</span>, bg_color=<span class="string">&#x27;#95B3D7&#x27;</span>))</span><br><span class="line">        body_style = workbook.add_format(xlsx_style())</span><br><span class="line">        _header = ping_header</span><br><span class="line">        <span class="keyword">for</span> index, value <span class="keyword">in</span> <span class="built_in">enumerate</span>(_header):</span><br><span class="line">            worksheet.write(<span class="number">0</span>, index + <span class="number">4</span>, value, head_style)</span><br><span class="line">        n_index = <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(data) &gt; <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">for</span> item <span class="keyword">in</span> data:</span><br><span class="line">                worksheet.write(n_index, <span class="number">4</span>, item[<span class="string">&#x27;name&#x27;</span>] <span class="keyword">if</span> item.get(<span class="string">&#x27;name&#x27;</span>) <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>, body_style)</span><br><span class="line">                worksheet.write(n_index, <span class="number">5</span>, item[<span class="string">&#x27;sex&#x27;</span>] <span class="keyword">if</span> item.get(<span class="string">&#x27;sex&#x27;</span>) <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>, body_style)</span><br><span class="line">                worksheet.write(n_index, <span class="number">6</span>, item[<span class="string">&#x27;age&#x27;</span>] <span class="keyword">if</span> item.get(<span class="string">&#x27;age&#x27;</span>) <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>, body_style)</span><br><span class="line">                worksheet.write(n_index, <span class="number">7</span>, item[<span class="string">&#x27;addr&#x27;</span>] <span class="keyword">if</span> item.get(<span class="string">&#x27;addr&#x27;</span>) <span class="keyword">else</span> <span class="string">&#x27;&#x27;</span>, body_style)</span><br><span class="line"></span><br><span class="line">                n_index += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 将生成的excel放入byte流给response</span></span><br><span class="line">        workbook.close()</span><br><span class="line">        url = reverse_lazy(<span class="string">&#x27;app_name:路由名称&#x27;</span>)  <span class="comment"># 将下载路由返回前端,前端通过请求返回的路由实现文件下载</span></span><br><span class="line">        <span class="keyword">return</span> JsonResponse(&#123;<span class="string">&#x27;redirect&#x27;</span>: url, <span class="string">&#x27;code&#x27;</span>: <span class="number">0</span>&#125;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">file_iterator</span>(<span class="params">file_path, chunk_size=<span class="number">512</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    文件生成器,防止文件过大，导致内存溢出</span></span><br><span class="line"><span class="string">    :param file_path: 文件路径</span></span><br><span class="line"><span class="string">    :param chunk_size: 块大小</span></span><br><span class="line"><span class="string">    :return: 生成器</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file_path, mode=<span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        <span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">            c = f.read(chunk_size)</span><br><span class="line">            <span class="keyword">if</span> c:</span><br><span class="line">                <span class="keyword">yield</span> c</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># xlsxwriter的样式公有函数</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">xlsx_style</span>(<span class="params">**kwargs</span>):</span></span><br><span class="line">    style = &#123;</span><br><span class="line">        <span class="string">&#x27;bold&#x27;</span>: kwargs.get(<span class="string">&#x27;bold&#x27;</span>, <span class="literal">False</span>),  <span class="comment"># 加粗</span></span><br><span class="line">        <span class="string">&#x27;font_name&#x27;</span>: kwargs.get(<span class="string">&#x27;font_name&#x27;</span>, <span class="string">&#x27;SimSun&#x27;</span>),  <span class="comment"># 字体类型，默认宋体</span></span><br><span class="line">        <span class="string">&#x27;font_size&#x27;</span>: kwargs.get(<span class="string">&#x27;font_size&#x27;</span>, <span class="number">10</span>),  <span class="comment"># 字体大小，默认12</span></span><br><span class="line">        <span class="string">&#x27;font_color&#x27;</span>: kwargs.get(<span class="string">&#x27;font_color&#x27;</span>, <span class="string">&#x27;#000000&#x27;</span>),  <span class="comment"># 字体颜色，黑色</span></span><br><span class="line">        <span class="string">&#x27;align&#x27;</span>: kwargs.get(<span class="string">&#x27;align&#x27;</span>, <span class="string">&#x27;center&#x27;</span>),  <span class="comment"># 默认水平居中</span></span><br><span class="line">        <span class="string">&#x27;valign&#x27;</span>: kwargs.get(<span class="string">&#x27;valign&#x27;</span>, <span class="string">&#x27;vcenter&#x27;</span>),  <span class="comment"># 默认垂直居中</span></span><br><span class="line">        <span class="string">&#x27;text_wrap&#x27;</span>: kwargs.get(<span class="string">&#x27;text_wrap&#x27;</span>, <span class="literal">True</span>),  <span class="comment"># 默认自动换行</span></span><br><span class="line">        <span class="string">&#x27;top&#x27;</span>: kwargs.get(<span class="string">&#x27;top&#x27;</span>, <span class="number">1</span>),  <span class="comment"># 上边界，线条宽度</span></span><br><span class="line">        <span class="string">&#x27;bottom&#x27;</span>: kwargs.get(<span class="string">&#x27;bottom&#x27;</span>, <span class="number">1</span>),  <span class="comment"># 边界</span></span><br><span class="line">        <span class="string">&#x27;left&#x27;</span>: kwargs.get(<span class="string">&#x27;left&#x27;</span>, <span class="number">1</span>),  <span class="comment"># 边界</span></span><br><span class="line">        <span class="string">&#x27;right&#x27;</span>: kwargs.get(<span class="string">&#x27;right&#x27;</span>, <span class="number">1</span>),  <span class="comment"># 边界</span></span><br><span class="line">        <span class="string">&#x27;bg_color&#x27;</span>: kwargs.get(<span class="string">&#x27;bg_color&#x27;</span>, <span class="string">&#x27;#FFFFFF&#x27;</span>),  <span class="comment"># 背景颜色，白色</span></span><br><span class="line">        <span class="comment"># 其他类型设置格式可以接着写</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> style</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件下载完成后样式展示"><a href="#文件下载完成后样式展示" class="headerlink" title="文件下载完成后样式展示"></a>文件下载完成后样式展示</h3><p><img data-fancybox="gallery" src="../../images/except_data.png" alt="except" data-caption="except" loading="lazy"></p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>任俊达<br>
+        <strong>Link：</strong><a href="https://renjunda.ren/lxb/6c2328a8.html" title="https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;6c2328a8.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;6c2328a8.html</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/Django/" rel="tag">Django</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="Search" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1692342189671"></script>
+
+
+	<script async src="/js/search.js?v=1692342189671"></script>
+
+
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>

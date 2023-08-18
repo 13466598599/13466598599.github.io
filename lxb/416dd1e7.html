@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hans">
+
+<head>
+    
+    <title>函数内的ajax同步请求导致遮罩层失效、或者导致loading正在加载提示失效问题 - 任俊达的技术博客</title>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    
+    
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <meta name="description" content="功能需求编写点击按钮，弹出loading遮罩层提示正在加载中…，同时查询后台信息，拼接数据后渲染到列表时，为了保障渲染时，列表中的数据已经拼接完成。所以在for循环中使用同步ajax进行请求，在success方法中进行拼接。 1234567891011121314151617181920212223function showPrintJobList()&amp;#123;	var loadingTi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="函数内的ajax同步请求导致遮罩层失效、或者导致loading正在加载提示失效问题">
+<meta property="og:url" content="https://renjunda.ren/lxb/416dd1e7.html">
+<meta property="og:site_name" content="任俊达的技术博客">
+<meta property="og:description" content="功能需求编写点击按钮，弹出loading遮罩层提示正在加载中…，同时查询后台信息，拼接数据后渲染到列表时，为了保障渲染时，列表中的数据已经拼接完成。所以在for循环中使用同步ajax进行请求，在success方法中进行拼接。 1234567891011121314151617181920212223function showPrintJobList()&amp;#123;	var loadingTi">
+<meta property="og:locale">
+<meta property="og:image" content="https://tool.lu/netcard/">
+<meta property="article:published_time" content="2022-08-02T05:57:35.000Z">
+<meta property="article:modified_time" content="2022-10-04T14:15:34.679Z">
+<meta property="article:author" content="任俊达">
+<meta property="article:tag" content="js">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://tool.lu/netcard/">
+    
+<link rel="stylesheet" href="/lib/fancybox/fancybox.css">
+<link rel="stylesheet" href="/lib/justifiedGallery/justifiedGallery.min.css">
+<link rel="stylesheet" href="/lib/mdui_043tiny/mdui.css">
+
+
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css?v=1692342189646">
+    
+    <link rel="stylesheet" href="/css/style.css?v=1692342189646">
+    
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body class="mdui-drawer-body-left">
+    
+    <div id="nexmoe-background">
+        <div class="nexmoe-bg" style="background-image: url(https://i.dawnlab.me/b5a7e61560facdd5b8aa9683fce147d7.png)"></div>
+        <div class="mdui-appbar mdui-shadow-0">
+            <div class="mdui-toolbar">
+                <a mdui-drawer="{target: '#drawer', swipe: true}" title="menu" class="mdui-btn mdui-btn-icon mdui-ripple"><i class="mdui-icon nexmoefont icon-menu"></i></a>
+                <div class="mdui-toolbar-spacer"></div>
+                <!--<a href="javascript:;" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">search</i></a>-->
+                <a href="/" title="任俊达" class="mdui-btn mdui-btn-icon"><img src="https://renjunda.ren/images/my_photo.png" alt="任俊达"></a>
+            </div>
+        </div>
+    </div>
+    <div id="nexmoe-header">
+        <div class="nexmoe-drawer mdui-drawer" id="drawer">
+    <div class="nexmoe-avatar mdui-ripple">
+        <a href="/" title="任俊达">
+            <img src="https://renjunda.ren/images/my_photo.png" alt="任俊达" alt="任俊达">
+        </a>
+    </div>
+    <div class="nexmoe-count">
+        <div><span>Articles</span>17</div>
+        <div><span>Tags</span>9</div>
+        <div><span>Categories</span>0</div>
+    </div>
+    <div class="nexmoe-list mdui-list" mdui-collapse="{accordion: true}">
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/" title="回到首页">
+            <i class="mdui-list-item-icon nexmoefont icon-home"></i>
+            <div class="mdui-list-item-content">
+                回到首页
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/PY.html" title="我的朋友">
+            <i class="mdui-list-item-icon nexmoefont icon-info-circle"></i>
+            <div class="mdui-list-item-content">
+                我的朋友
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/money.html" title="请我喝茶">
+            <i class="mdui-list-item-icon nexmoefont icon-unorderedlist"></i>
+            <div class="mdui-list-item-content">
+                请我喝茶
+            </div>
+        </a>
+        
+        <a class="nexmoe-list-item mdui-list-item mdui-ripple false" href="/about.html" title="关于博主">
+            <i class="mdui-list-item-icon nexmoefont icon-container"></i>
+            <div class="mdui-list-item-content">
+                关于博主
+            </div>
+        </a>
+        
+    </div>
+    <aside id="nexmoe-sidebar">
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-search">
+        
+            <form id="search_form">
+                <label><input class="st-default-search-input" id="search_value" name="q" type="search" placeholder="Search" style="
+                    font-size: 15px !important;
+                    height: 56px !important;
+                    background-image: none;
+                "></label>
+            </form>
+         
+    </div>
+</div>
+    
+    <div class="nexmoe-widget-wrap">
+    <div class="nexmoe-widget nexmoe-social">
+        <a class="mdui-ripple" href="https://jq.qq.com/?_wv=1027&k=5CfKHun" target="_blank" mdui-tooltip="{content: 'QQ群'}" style="color: rgb(249, 174, 8);background-color: rgba(249, 174, 8, .1);">
+            <i class="nexmoefont icon-QQ"></i>
+        </a><a class="mdui-ripple" href="https://space.bilibili.com/20238211" target="_blank" mdui-tooltip="{content: '哔哩哔哩'}" style="color: rgb(231, 106, 141);background-color: rgba(231, 106, 141, .15);">
+            <i class="nexmoefont icon-bilibili"></i>
+        </a><a class="mdui-ripple" href="https://github.com/nexmoe/" target="_blank" mdui-tooltip="{content: 'GitHub'}" style="color: rgb(25, 23, 23);background-color: rgba(25, 23, 23, .15);">
+            <i class="nexmoefont icon-github"></i>
+        </a>
+    </div>
+</div>
+    
+    
+
+    
+    
+  <div class="nexmoe-widget-wrap">
+    <div id="randomtagcloud" class="nexmoe-widget tagcloud nexmoe-rainbow">
+      <a href="/tags/Django/" style="font-size: 15px;">Django</a> <a href="/tags/Flask/" style="font-size: 10px;">Flask</a> <a href="/tags/Linux/" style="font-size: 10px;">Linux</a> <a href="/tags/Mysql/" style="font-size: 10px;">Mysql</a> <a href="/tags/Python/" style="font-size: 20px;">Python</a> <a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/layui/" style="font-size: 10px;">layui</a> <a href="/tags/nginx/" style="font-size: 10px;">nginx</a> <a href="/tags/python/" style="font-size: 10px;">python</a>
+    </div>
+    
+  </div>
+
+    
+</aside>
+    <div class="nexmoe-copyright">
+        &copy; 2023 任俊达
+        Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+        & <a href="https://github.com/theme-nexmoe/hexo-theme-nexmoe" target="_blank">Nexmoe</a>
+        <br><a target="_blank" href="https://www.upyun.com/?utm_source=lianmeng&utm_medium=referral"><img src="https://i.dawnlab.me/c0268c1e6cfd0863d6ba35be1575941a.png" width="150px"></a><script data-ad-client="ca-pub-2058306854838448" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </div>
+</div><!-- .nexmoe-drawer -->
+    </div>
+    <div id="nexmoe-content">
+        <div class="nexmoe-primary">
+            <div class="nexmoe-post">
+
+  <article>
+      
+          <div class="nexmoe-post-cover" style="padding-bottom: 62.5%;"> 
+              <img src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.shaichong.com%2Fuploads%2F20211108%2F9888ef97e143df7aa7e53ac31787daa0.jpg&refer=http%3A%2F%2Fwww.shaichong.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1667484821&t=ed6afc6fad37feb48562f128f7bed63d" alt="函数内的ajax同步请求导致遮罩层失效、或者导致loading正在加载提示失效问题" loading="lazy">
+              <h1>函数内的ajax同步请求导致遮罩层失效、或者导致loading正在加载提示失效问题</h1>
+          </div>
+      
+      
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    <a><i class="nexmoefont icon-calendar-fill"></i>2022年08月02日</a>
+</div>
+
+      <div class="nexmoe-post-meta nexmoe-rainbow" style="margin:10px 0!important;">
+    
+</div>
+
+      <img src="https://tool.lu/netcard/">
+
+
+<h4 id="功能需求"><a href="#功能需求" class="headerlink" title="功能需求"></a>功能需求</h4><p>编写点击按钮，弹出loading遮罩层提示正在加载中…，同时查询后台信息，拼接数据后渲染到列表时，为了保障渲染时，列表中的数据已经拼接完成。所以在for循环中使用同步<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=ajax&spm=1001.2101.3001.7020">ajax</a>进行请求，在success方法中进行拼接。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showPrintJobList</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> loadingTip = $(<span class="string">&#x27;#loading&#x27;</span>);</span><br><span class="line">	loadingTip.show();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; rwid.length;i++)&#123;</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			url: xxxxx,</span><br><span class="line">			<span class="keyword">async</span>: <span class="literal">false</span>,  <span class="comment">//默认异步，为保证数据完整和顺序使用同步请求</span></span><br><span class="line">			type: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">			data:&#123;</span><br><span class="line">				xxx: xxx</span><br><span class="line">			&#125;,</span><br><span class="line">			dataType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">	      	success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">				<span class="comment">//.....循环拼接结果，弹窗显示列表:$(&#x27;#rwlist&#x27;).show();</span></span><br><span class="line">			&#125;,</span><br><span class="line">			error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="built_in">console</span>.log(err);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	loadingTip.hide();</span><br><span class="line">	$(<span class="string">&#x27;#rwlist&#x27;</span>).show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="问题信息"><a href="#问题信息" class="headerlink" title="问题信息"></a>问题信息</h3><p>点击按钮后，遮罩层没有弹出，而是等待表单渲染完成后，看到一闪而过的遮罩层。</p>
+<h3 id="问题原因async-false"><a href="#问题原因async-false" class="headerlink" title="问题原因async: false"></a>问题原因async: false</h3><p>ajax同步请求在运行的时候，浏览器的UI、Dom元素渲染会被阻塞。所以当点击事件触发showPrintJobList函数时，loading.show()是有被加载到浏览器的js运行线程中，但是运行到ajax同步请求时，会将loading.show()阻塞执行，等到同步ajax请求完了，才会运行。然后同步ajax已经请求完了，然后直接被隐藏，然后显示列表。所以会看到一闪而过的loading遮罩层</p>
+<h3 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h3><p>一、使用async wait关键字<br>二、使用JQuery的Deferred对象和$.when().done().fail()</p>
+<h5 id="async-await关键字"><a href="#async-await关键字" class="headerlink" title="async/await关键字"></a>async/await关键字</h5><blockquote>
+<p>1.标识所修饰的函数存在异步代码，函数内部可用await关键字修饰异步过程变为同步。函数内部也可以全部为同步代码。<br>2.非阻塞：async所标识的函数内存在异步代码，会等待异步代码执行完，但是async函数本身会马上返回，不会阻塞当前js工作主线程，可以简单认为，async函数工作在主线程，同步执行，不会阻塞界面渲染，async函数内部由await关键字修饰的异步过程，工作在相应的协程上，会阻塞等待异步任务的完成再返回；</p>
+</blockquote>
+<p>代码修改如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">showPrintJobList</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> loadingTip = $(<span class="string">&#x27;#loading&#x27;</span>);</span><br><span class="line">	loadingTip.show();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; rwid.length;i++)&#123;</span><br><span class="line">		<span class="keyword">await</span> $.ajax(&#123;   <span class="comment">//使用await关键字修饰异步请求，保证数据顺序完整</span></span><br><span class="line">			url: xxxxx,</span><br><span class="line">			<span class="keyword">async</span>: <span class="literal">true</span>,  <span class="comment">//有await关键字，ajax请求修改为异步</span></span><br><span class="line">			type: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">			data:&#123;</span><br><span class="line">				xxx: xxx</span><br><span class="line">			&#125;,</span><br><span class="line">			dataType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">	      	success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">				<span class="comment">//.....循环拼接结果，弹窗显示列表:$(&#x27;#rwlist&#x27;).show();</span></span><br><span class="line">			&#125;,</span><br><span class="line">			error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				<span class="built_in">console</span>.log(err);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	loadingTip.hide();</span><br><span class="line">	$(<span class="string">&#x27;#rwlist&#x27;</span>).show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>或者使用JQuery的Deferred对象和$.when().done().fail()使异步请求同步执行，同时不阻塞主线程。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> dataList = [];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">showPrintJobList</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> defer = $.Deferred();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i &lt; rwid.length;i++)&#123;</span><br><span class="line">		$.ajax(&#123;   </span><br><span class="line">			url: xxxxx,</span><br><span class="line">			<span class="keyword">async</span>: <span class="literal">true</span>,  <span class="comment">//使用Deferred对象，ajax请求修改为异步</span></span><br><span class="line">			type: <span class="string">&#x27;POST&#x27;</span>,</span><br><span class="line">			data:&#123;</span><br><span class="line">				xxx: xxx</span><br><span class="line">			&#125;,</span><br><span class="line">			dataType: <span class="string">&#x27;json&#x27;</span>,</span><br><span class="line">	      	success: <span class="function"><span class="keyword">function</span>(<span class="params">result</span>) </span>&#123;</span><br><span class="line">				<span class="comment">//dataList保存结果</span></span><br><span class="line">				dataList.push(result);</span><br><span class="line">				defer.resolve(dataList);</span><br><span class="line">			&#125;,</span><br><span class="line">			error: <span class="function"><span class="keyword">function</span>(<span class="params">err</span>)</span>&#123;</span><br><span class="line">				defer.reject(err);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> defer;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$(<span class="string">&#x27;button#showList&#x27;</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">var</span> loadingTip = $(<span class="string">&#x27;#loading&#x27;</span>);</span><br><span class="line">	loadingTip.show();</span><br><span class="line">	$.when(showPrintJobList()).done(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">        <span class="comment">//循环拼接data中的list中的数据</span></span><br><span class="line">        loadingTip.hide();</span><br><span class="line">		$(<span class="string">&#x27;#rwlist&#x27;</span>).show();</span><br><span class="line">    &#125;).fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    	<span class="built_in">console</span>.log(err);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="原理解析"><a href="#原理解析" class="headerlink" title="原理解析"></a>原理解析</h3><p>浏览器中一般会运行UI线程、JS线程以及事件触发线程。<br>在上述上述代码中，loading.show()方法涉及到dom树的更新，所以被加载到了UI线程执行任务中。但是后面的ajax同步请求，因为不是异步的所以浏览器不会重新新增一个线程进行请求，而是直接放在js线程中阻塞其他线程执行。所以UI线程不能执行loading.show()方法。</p>
+
+  </article>
+
+  
+      
+    <div class="nexmoe-post-copyright">
+        <strong>Author：</strong>任俊达<br>
+        <strong>Link：</strong><a href="https://renjunda.ren/lxb/416dd1e7.html" title="https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;416dd1e7.html" target="_blank" rel="noopener">https:&#x2F;&#x2F;renjunda.ren&#x2F;lxb&#x2F;416dd1e7.html</a><br>
+        
+            <strong>版权声明：</strong>本文采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/deed.zh" target="_blank">CC BY-NC-SA 3.0 CN</a> 协议进行许可
+        
+    </div>
+
+
+  
+  
+  <div class="nexmoe-post-meta nexmoe-rainbow">
+    
+    
+        <a class="nexmoefont icon-tag-fill -none-link" href="/tags/js/" rel="tag">js</a>
+    
+</div>
+
+  
+      <div class="nexmoe-post-footer">
+          <section class="nexmoe-comment">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.css">
+<div id="gitalk"></div>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script>
+<script type="text/javascript">
+    var gitalk = new Gitalk({
+        clientID: '80b2453b6d5f37ad6225',
+        clientSecret: '43e99fa852795c9a7b3eb924b2558c64b84bbdeb',
+        id: window.location.pathname,
+        repo: 'nexmoe.github.io',
+        owner: 'nexmoe',
+        admin: 'nexmoe'
+    })
+    gitalk.render('gitalk')
+</script>
+</section>
+      </div>
+  
+</div>
+            <div class="nexmoe-post-right">
+              <div class="nexmoe-fixed">
+                  <div class="nexmoe-tool"> 
+                    
+                      
+                    
+                      <a href="#nexmoe-content" class="toc-link" aria-label="回到顶部" title="top"><button class="mdui-fab mdui-ripple"><i class="nexmoefont icon-caret-top"></i></button></a>
+                  </div>
+              </div>
+            </div>
+        </div>
+    </div>
+     
+    <div id="nexmoe-search-space">
+        <div class="search-container">
+            <div class="search-header">
+                <div class="search-input-container">
+                    <input class="search-input" type="text" placeholder="Search" oninput="sinput();">
+                </div>
+                <a class="search-close" onclick="sclose();">×</a>
+            </div>
+            <div class="search-body"></div>
+        </div>
+    </div>
+
+    
+<script src="/lib/mdui_043tiny/mdui.js"></script>
+<script src="/lib/jquery.min.js"></script>
+<script src="/lib/justifiedGallery/jquery.justifiedGallery.min.js"></script>
+<script src="/lib/fancybox/fancybox.umd.js"></script>
+
+
+ 
+
+<script async src="/js/app.js?v=1692342189646"></script>
+
+
+	<script async src="/js/search.js?v=1692342189646"></script>
+
+
+<script>
+	$(".justified-gallery").justifiedGallery({
+		rowHeight: 160,
+		margins: 10,
+	});
+</script>
+
+
+    
+
+
+
+
+
+</body>
+
+</html>
